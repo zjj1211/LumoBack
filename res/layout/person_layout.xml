@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <TextView
+        android:id="@+id/textView01"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:background="#ffac00"
+        android:text="智能腰带"
+        android:gravity="left|center"
+        android:textSize="20dp" />
+    <RelativeLayout 
+        android:id="@+id/RL0001"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textview0001"
+            android:text="您的心率："
+            android:textSize="13dp"/>
+        <EditText 
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/edittext0001"
+            android:layout_toRightOf="@id/textview0001"
+            android:hint="正常"
+            android:textSize="13dp" />
+    </RelativeLayout>
+    
+    <RelativeLayout 
+        android:id="@+id/RL002"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textview0002"
+            android:text="您的体温："
+            android:textSize="13dp"/>
+        <EditText 
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/edittext0002"
+            android:layout_toRightOf="@id/textview0002"
+            android:hint="正常"
+            android:textSize="13dp" />
+    </RelativeLayout>
+    
+    <RelativeLayout 
+        android:id="@+id/RL003"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textview0003"
+            android:text="您的初估身体状况："
+            android:textSize="13dp"/>
+        <EditText 
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/edittext0003"
+            android:layout_toRightOf="@id/textview0003"
+            android:hint="优"
+            android:textSize="13dp" />
+    </RelativeLayout>
+    
+
+</LinearLayout>

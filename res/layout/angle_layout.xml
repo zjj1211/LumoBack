@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LL01"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <TextView
+        android:id="@+id/textView01"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:background="#ffac00"
+        android:text="智能腰带"
+        android:gravity="left|center"
+        android:textSize="20dp" />
+    <RelativeLayout 
+        android:id="@+id/RL01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textview001"
+            android:text="1号角度传感器："
+            android:textSize="13dp"/>
+        <EditText 
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/edittext001"
+            android:layout_toRightOf="@id/textview001"
+            android:hint="角度"
+            android:textSize="13dp" />
+    </RelativeLayout>
+    
+    <RelativeLayout 
+        android:id="@+id/RL02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textview002"
+            android:text="2号角度传感器："
+            android:textSize="13dp"/>
+        <EditText 
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/edittext002"
+            android:layout_toRightOf="@id/textview002"
+            android:hint="角度"
+            android:textSize="13dp" />
+    </RelativeLayout>
+    
+    <RelativeLayout 
+        android:id="@+id/RL03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textview003"
+            android:text="3号角度传感器："
+            android:textSize="13dp"/>
+        <EditText 
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/edittext003"
+            android:layout_toRightOf="@id/textview003"
+            android:hint="角度"
+            android:textSize="13dp" />
+    </RelativeLayout>
+    
+    <RelativeLayout 
+        android:id="@+id/RL04"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textview004"
+            android:text="4号角度传感器："
+            android:textSize="13dp"/>
+        <EditText 
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/edittext004"
+            android:layout_toRightOf="@id/textview004"
+            android:hint="角度"
+            android:textSize="13dp" />
+    </RelativeLayout>
+
+</LinearLayout>

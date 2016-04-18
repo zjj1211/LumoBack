@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/tabhost"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <FrameLayout
+            android:id="@android:id/tabcontent"
+            android:layout_width="fill_parent"
+            android:layout_height="0.0dip"
+            android:layout_weight="1.0" />
+
+        <TabWidget
+            android:id="@android:id/tabs"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.0"
+            android:visibility="gone" />
+
+        <RadioGroup
+            android:id="@+id/main_radiogroup"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@drawable/tab_background"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="2dip" >
+
+            <RadioButton
+                android:id="@+id/RadioButton0"
+                style="@style/tab_background"
+                android:drawableTop="@drawable/xinlv"
+                android:text="心率"
+                android:textColor="#000000" />
+
+            <RadioButton
+                android:id="@+id/RadioButton1"
+                style="@style/tab_background"
+                android:drawableTop="@drawable/wendu"
+                android:text="温度"
+                android:textColor="#000000" />
+
+            <RadioButton
+                android:id="@+id/RadioButton2"
+                style="@style/tab_background"
+                android:drawableTop="@drawable/jiaodu"
+                android:text="角度"
+                android:textColor="#000000" />
+
+            <RadioButton
+                android:id="@+id/RadioButton3"
+                style="@style/tab_background"
+                android:drawableTop="@drawable/person"
+                android:text="个人"
+                android:textColor="#000000" />
+       
+        </RadioGroup>
+    </LinearLayout>
+
+</TabHost>
