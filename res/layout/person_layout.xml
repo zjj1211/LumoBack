@@ -15,60 +15,66 @@
         android:id="@+id/RL0001"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#ffffff">
+        android:background="#ffffff"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="50dp">
         <TextView 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textview0001"
             android:text="您的心率："
-            android:textSize="13dp"/>
+            android:textSize="16dp"/>
         <EditText 
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:id="@+id/edittext0001"
             android:layout_toRightOf="@id/textview0001"
             android:hint="正常"
-            android:textSize="13dp" />
+            android:textSize="16dp" />
     </RelativeLayout>
     
     <RelativeLayout 
         android:id="@+id/RL002"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#ffffff">
+        android:background="#ffffff"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="20dp">
         <TextView 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textview0002"
             android:text="您的体温："
-            android:textSize="13dp"/>
+            android:textSize="16dp"/>
         <EditText 
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:id="@+id/edittext0002"
             android:layout_toRightOf="@id/textview0002"
             android:hint="正常"
-            android:textSize="13dp" />
+            android:textSize="16dp" />
     </RelativeLayout>
     
     <RelativeLayout 
         android:id="@+id/RL003"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#ffffff">
+        android:background="#ffffff"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="20dp">
         <TextView 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textview0003"
             android:text="您的初估身体状况："
-            android:textSize="13dp"/>
+            android:textSize="16dp"/>
         <EditText 
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:id="@+id/edittext0003"
             android:layout_toRightOf="@id/textview0003"
             android:hint="优"
-            android:textSize="13dp" />
+            android:textSize="16dp" />
     </RelativeLayout>
     
 

@@ -55,7 +55,6 @@
         tc:radius="60dip"
         tc:ringColor="@color/ring_color"
         tc:strokeWidth="10dip" />
-    "
 
     <LinearLayout
       android:id="@+id/linearLayout1"

@@ -56,8 +56,9 @@ public class HeartRateActivity extends Activity {
 	
 	private TasksCompletedView mTasksView;
 	
-	private int mTotalProgress;
+	private int heartRate;
 	private int mCurrentProgress;
+	
 	
 	//定时
 	private Timer timer01= new Timer();
@@ -86,6 +87,8 @@ public class HeartRateActivity extends Activity {
 	private static int averageIndex =0;
 	private static final int averageArraySize = 4;
 	private static final int[] averageArray = new int[averageArraySize];
+	public static int progress01=87;
+	
 	
 	public static enum TYPE {
 		GREEN, RED
@@ -115,7 +118,6 @@ public class HeartRateActivity extends Activity {
 	BlueBroadcastReceiver mReceiver = new BlueBroadcastReceiver();
 	
 
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -131,13 +133,13 @@ public class HeartRateActivity extends Activity {
 //		Button end01 = (Button)findViewById(R.id.end);
 //		end01.setOnClickListener(new EndButtonListener());
 		
-
 		
 		/*一个listview用来显示搜索到的蓝牙设备*/
-        ListView arraylistview=(ListView)findViewById(R.id.arraylistview);     
+        ListView arraylistview=(ListView)findViewById(R.id.arraylistview);
+        ListChooseListener L01= new ListChooseListener();
         adtDevices=new ArrayAdapter<String>(this,R.layout.array_item,listDevices);      
         arraylistview.setAdapter(adtDevices);
-        arraylistview.setOnItemClickListener(new ListChooseListener());
+        arraylistview.setOnItemClickListener(L01);
         
         // Register the BroadcastReceiver  
        	IntentFilter intent = new IntentFilter();
@@ -225,6 +227,7 @@ public class HeartRateActivity extends Activity {
 
     		final Button start01=(Button)findViewById(R.id.start);
     		
+    		
     		@Override
     		public void onItemClick(AdapterView<?> parent, View view, int position,
     				long id) {
@@ -272,8 +275,12 @@ public class HeartRateActivity extends Activity {
     			}
     			thread = new ConnectedThread(socket);  //开启通信的线程
     			thread.start();
+    			progress01 = thread.progress;
+    			System.out.println("progress01"+progress01);
     		}
     	}
+    	
+		
     	
     	/*广播接收器类用来监听蓝牙的广播*/
     	class BlueBroadcastReceiver extends BroadcastReceiver{
@@ -536,8 +543,9 @@ public class HeartRateActivity extends Activity {
 	
 	
 	private void initVariable() {
-		mTotalProgress = 150;
-		mCurrentProgress = 0;
+		heartRate = progress01;
+		System.out.println("heartRate=="+heartRate);
+		mCurrentProgress=0;
 	}
 	
 	private void initView() {
@@ -548,7 +556,7 @@ public class HeartRateActivity extends Activity {
 
 		@Override
 		public void run() {
-			while (mCurrentProgress < mTotalProgress) {
+			while (mCurrentProgress < heartRate) {
 				mCurrentProgress += 1;
 				mTasksView.setProgress(mCurrentProgress);
 				try {

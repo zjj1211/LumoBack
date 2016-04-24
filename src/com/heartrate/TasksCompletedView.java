@@ -2,6 +2,7 @@ package com.heartrate;
 
 import com.example.lumoback20160318.R;
 
+import android.bluetooth.BluetoothSocket;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -42,6 +43,7 @@ public class TasksCompletedView extends View {
 	private int mTotalProgress = 200;
 	// 褰撳墠杩涘害
 	private int mProgress;
+	
 
 	public TasksCompletedView(Context context, AttributeSet attrs) {
 		super(context, attrs);

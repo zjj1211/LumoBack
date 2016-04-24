@@ -41,7 +41,7 @@ public class CustomSphygmomanometerView extends View{
 	float temperature;
 	
 	//水银柱的动态高度
-	float temperatureHieght;
+	float temperatureHieght= 740;
 	float startTemperatureHeight;
 	
 	//水银柱计时器

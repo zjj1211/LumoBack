@@ -16,6 +16,8 @@ public class ConnectedThread extends Thread {
 	final BluetoothSocket mmSocket;
     final InputStream mmInStream;
     final OutputStream mmOutStream;
+    
+    public int progress = 50;
     //构造函数
     public ConnectedThread(BluetoothSocket socket) {
         mmSocket = socket;
@@ -34,7 +36,7 @@ public class ConnectedThread extends Thread {
     }
  
     public void run() {
-    	byte[] buffer = new byte[32];  // buffer store for the stream
+    	byte[] buffer = new byte[8];  // buffer store for the stream
         int bytes; // bytes returned from read()   
         // Keep listening to the InputStream until an exception occurs
         while (true) {        	
@@ -44,7 +46,8 @@ public class ConnectedThread extends Thread {
                  // Send the obtained bytes to the UI activity
             	 String str = new String(buffer);
             	 System.out.println("接受到的数据："+str);
-//            	 flat = byteToInt(buffer);   //用一个函数实现类型转化，从byte到int
+            	 progress = byteToInt(buffer);   //用一个函数实现类型转化，从byte到int
+            	 System.out.println("心率："+ progress);
 //                 handler.obtainMessage(READ, bytes, -1, str)
 //                         .sendToTarget();     //压入消息队列
                  
