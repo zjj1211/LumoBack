@@ -58,6 +58,7 @@ public class HeartRateActivity extends Activity {
 	
 	private int heartRate;
 	private int mCurrentProgress;
+	public int progress;
 	
 	
 	//定时
@@ -87,7 +88,7 @@ public class HeartRateActivity extends Activity {
 	private static int averageIndex =0;
 	private static final int averageArraySize = 4;
 	private static final int[] averageArray = new int[averageArraySize];
-	public static int progress01=87;
+//	public  int progress01=87;
 	
 	
 	public static enum TYPE {
@@ -105,6 +106,9 @@ public class HeartRateActivity extends Activity {
 	private static final int[] beatsArray = new int[beatsArraySize];
 	private static double beats = 0;
 	private static long startTime = 0;
+	int READ = 3;
+	int progress03 =68;
+	String progress02;
 	
 	final UUID uuid = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 	final BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -226,7 +230,7 @@ public class HeartRateActivity extends Activity {
     	class ListChooseListener implements OnItemClickListener{
 
     		final Button start01=(Button)findViewById(R.id.start);
-    		
+    		int progress01;
     		
     		@Override
     		public void onItemClick(AdapterView<?> parent, View view, int position,
@@ -275,8 +279,6 @@ public class HeartRateActivity extends Activity {
     			}
     			thread = new ConnectedThread(socket);  //开启通信的线程
     			thread.start();
-    			progress01 = thread.progress;
-    			System.out.println("progress01"+progress01);
     		}
     	}
     	
@@ -381,61 +383,72 @@ public class HeartRateActivity extends Activity {
 //			}
     		
 //    	}
+    	
+    	Handler handler02 = new Handler(){
+    		//处理消息队列的Handler对象
+    		public void handlerMessage(Message msg){
+    			if(msg.what==READ) {
+    				String str =(String)msg.obj;
+    				progress02 =str;
+    				progress03 = Integer.parseInt(progress02);
+    			}
+    		}
+    	};
         
     	/*
     	 * 该类只实现了数据的接收，蓝牙数据的发送自行实现
     	 * 
     	 * */
-//    	private class ConnectedThread extends Thread {
-//    		
-//    		private final BluetoothSocket mmSocket;
-//            private final InputStream mmInStream;
-//            private final OutputStream mmOutStream;
-//            //构造函数
-//            public ConnectedThread(BluetoothSocket socket) {
-//                mmSocket = socket;
-//                InputStream tmpIn = null;
-//                OutputStream tmpOut = null;
-//         
-//                // Get the input and output streams, using temp objects because
-//                // member streams are final
-//                try {
-//                    tmpIn = socket.getInputStream(); //获取输入流
-//                    tmpOut = socket.getOutputStream();  //获取输出流
-//                } catch (IOException e) { }
-//         
-//                mmInStream = tmpIn;
-//                mmOutStream = tmpOut;
-//            }
-//         
-//            public void run() {
-//            	byte[] buffer = new byte[32];  // buffer store for the stream
-//                int bytes; // bytes returned from read()   
-//                // Keep listening to the InputStream until an exception occurs
-//                while (true) {        	
-//                    try {                	
-//                        // Read from the InputStream            
-//                    	 bytes = mmInStream.read(buffer); //bytes数组返回值，为buffer数组的长度
-//                         // Send the obtained bytes to the UI activity
-//                    	 String str = new String(buffer);
-//                    	 System.out.println("接受到的数据："+str);
-////                    	 flat = byteToInt(buffer);   //用一个函数实现类型转化，从byte到int
-//                         handler.obtainMessage(READ, bytes, -1, str)
-//                                 .sendToTarget();     //压入消息队列
-//                         
-//                    } catch (Exception e) {
-//                    	System.out.print("read error");
-//                        break;
-//                        
-//                    }
-//                }
-//            }
-//
-//			private int byteToInt(byte[] b) {
-//				// TODO Auto-generated method stub
-//				return (((int)b[0])+((int)b[1])*256);
-//			}    
-//    	}
+    	private class ConnectedThread extends Thread {
+    		
+    		private final BluetoothSocket mmSocket;
+            private final InputStream mmInStream;
+            private final OutputStream mmOutStream;
+            //构造函数
+            public ConnectedThread(BluetoothSocket socket) {
+                mmSocket = socket;
+                InputStream tmpIn = null;
+                OutputStream tmpOut = null;
+         
+                // Get the input and output streams, using temp objects because
+                // member streams are final
+                try {
+                    tmpIn = socket.getInputStream(); //获取输入流
+                    tmpOut = socket.getOutputStream();  //获取输出流
+                } catch (IOException e) { }
+         
+                mmInStream = tmpIn;
+                mmOutStream = tmpOut;
+            }
+         
+            public void run() {
+            	byte[] buffer = new byte[32];  // buffer store for the stream
+                int bytes; // bytes returned from read()   
+                // Keep listening to the InputStream until an exception occurs
+                while (true) {        	
+                    try {                	
+                        // Read from the InputStream            
+                    	 bytes = mmInStream.read(buffer); //bytes数组返回值，为buffer数组的长度
+                         // Send the obtained bytes to the UI activity
+                    	 String str = new String(buffer);
+                    	 System.out.println("接受到的数据："+str);
+                    	 progress = byteToInt(buffer);   //用一个函数实现类型转化，从byte到int
+                         handler02.obtainMessage(READ, bytes, -1, str)
+                                 .sendToTarget();     //压入消息队列
+                         
+                    } catch (Exception e) {
+                    	System.out.print("read error");
+                        break;
+                        
+                    }
+                }
+            }
+
+			private int byteToInt(byte[] b) {
+				// TODO Auto-generated method stub
+				return (((int)b[0])+((int)b[1])*256);
+			}    
+    	}
     	
 	
 	//曲线
@@ -543,7 +556,7 @@ public class HeartRateActivity extends Activity {
 	
 	
 	private void initVariable() {
-		heartRate = progress01;
+		heartRate = progress03;
 		System.out.println("heartRate=="+heartRate);
 		mCurrentProgress=0;
 	}
