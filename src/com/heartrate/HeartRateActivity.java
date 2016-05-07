@@ -27,7 +27,7 @@ import com.example.lumoback20160318.R;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -384,14 +384,16 @@ public class HeartRateActivity extends Activity {
     		
 //    	}
     	
-    	Handler handler02 = new Handler(){
+		 Handler handler02 = new Handler(){
     		//处理消息队列的Handler对象
-    		public void handlerMessage(Message msg){
+    		@Override
+    		public void handleMessage(Message msg) {
     			if(msg.what==READ) {
     				String str =(String)msg.obj;
     				progress02 =str;
     				progress03 = Integer.parseInt(progress02);
     			}
+    			super.handleMessage(msg);
     		}
     	};
         
@@ -433,8 +435,7 @@ public class HeartRateActivity extends Activity {
                     	 String str = new String(buffer);
                     	 System.out.println("接受到的数据："+str);
                     	 progress = byteToInt(buffer);   //用一个函数实现类型转化，从byte到int
-                         handler02.obtainMessage(READ, bytes, -1, str)
-                                 .sendToTarget();     //压入消息队列
+                         handler02.obtainMessage(READ, bytes, -1, str).sendToTarget();     //压入消息队列
                          
                     } catch (Exception e) {
                     	System.out.print("read error");
