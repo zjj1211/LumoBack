@@ -57,7 +57,7 @@ public class HeartRateActivity extends Activity {
 	private TasksCompletedView mTasksView;
 	
 	private int heartRate;
-	private int mCurrentProgress;
+	public int mCurrentProgress;
 	public int progress;
 	
 	
@@ -107,8 +107,8 @@ public class HeartRateActivity extends Activity {
 	private static double beats = 0;
 	private static long startTime = 0;
 	int READ = 3;
-	int progress03 =68;
-	String progress02;
+	int progress03 =20;
+//	String progress02;
 	
 	final UUID uuid = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 	final BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -389,11 +389,18 @@ public class HeartRateActivity extends Activity {
     		@Override
     		public void handleMessage(Message msg) {
     			if(msg.what==READ) {
-    				String str =(String)msg.obj;
-    				progress02 =str;
-    				progress03 = Integer.parseInt(progress02);
+    				System.out.println("hello");
+    				byte[] progress02 = (byte[])msg.obj;
+    				System.out.println("progress02 == " + progress02[0]);
+    				progress03 = byteToInt(progress02);
+    				System.out.println("progress03 == " + progress03);
+    				mCurrentProgress=0;
+    				new Thread(new ProgressRunable()).start();
     			}
     			super.handleMessage(msg);
+    		}
+    		private int byteToInt(byte[] b) {
+    			return ((int)b[0]);
     		}
     	};
         
@@ -424,7 +431,7 @@ public class HeartRateActivity extends Activity {
             }
          
             public void run() {
-            	byte[] buffer = new byte[32];  // buffer store for the stream
+            	byte[] buffer = new byte[8];  // buffer store for the stream
                 int bytes; // bytes returned from read()   
                 // Keep listening to the InputStream until an exception occurs
                 while (true) {        	
@@ -432,10 +439,11 @@ public class HeartRateActivity extends Activity {
                         // Read from the InputStream            
                     	 bytes = mmInStream.read(buffer); //bytes数组返回值，为buffer数组的长度
                          // Send the obtained bytes to the UI activity
-                    	 String str = new String(buffer);
-                    	 System.out.println("接受到的数据："+str);
-                    	 progress = byteToInt(buffer);   //用一个函数实现类型转化，从byte到int
-                         handler02.obtainMessage(READ, bytes, -1, str).sendToTarget();     //压入消息队列
+//                    	 String str = new String(buffer);
+//                    	 System.out.println("接受到的数据："+str);
+//                    	 progress = byteToInt(buffer);   //用一个函数实现类型转化，从byte到int
+//                    	 System.out.println("progress:"+progress);
+                         handler02.obtainMessage(READ, bytes, -1, buffer).sendToTarget();     //压入消息队列
                          
                     } catch (Exception e) {
                     	System.out.print("read error");
@@ -570,11 +578,12 @@ public class HeartRateActivity extends Activity {
 
 		@Override
 		public void run() {
-			while (mCurrentProgress < heartRate) {
+			System.out.println("33300000003");
+			while (mCurrentProgress < progress03) {
 				mCurrentProgress += 1;
 				mTasksView.setProgress(mCurrentProgress);
 				try {
-					Thread.sleep(100);
+					Thread.sleep(50);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
