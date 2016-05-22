@@ -5,4 +5,7 @@
     <color name="title_txt_color">#f1f1f3</color>
     <color name="circle_color">#323a45</color>
     <color name="ring_color">#00ff06</color>
+    <color name="black">#000000</color>
+    <color name="gray">#aaaaaa</color>
+    <color name="light_blue">#6593cb</color>
 </resources>

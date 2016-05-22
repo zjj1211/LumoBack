@@ -23,6 +23,8 @@ import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 
 import com.example.lumoback20160318.R;
+import com.lumobacksqlite.DBHelper;
+import com.temperature.TemperatureActivity;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -33,6 +35,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.BroadcastReceiver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -49,6 +52,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TabHost;
 import android.widget.Toast;
 
 
@@ -89,6 +93,8 @@ public class HeartRateActivity extends Activity {
 	private static final int averageArraySize = 4;
 	private static final int[] averageArray = new int[averageArraySize];
 //	public  int progress01=87;
+	public double temper =37.0;
+	public double front;
 	
 	
 	public static enum TYPE {
@@ -393,7 +399,28 @@ public class HeartRateActivity extends Activity {
     				byte[] progress02 = (byte[])msg.obj;
     				System.out.println("progress02 == " + progress02[0]);
     				progress03 = byteToInt(progress02);
+    				temper = byteToDouble(progress02);
+    				front = byteToDouble(progress02);
     				System.out.println("progress03 == " + progress03);
+    				System.out.println("temper == " + temper);
+    				//创建ContentValues对象，封装记录信息
+    				ContentValues value = new ContentValues();
+    				value.put("heartrate", progress03);
+    				value.put("temperature",temper);
+    				value.put("frontangle", front);
+    				value.put("rightangle", front);
+    				value.put("testresult",progress03);
+    				
+    				//创建数据库工具类DBHelper
+    				DBHelper Helper = new DBHelper(getApplicationContext());
+    				//插入数据库中
+    				Helper.insert(value);
+//    				TabHost tabhost =(TabHost)findViewById(android.R.id.tabhost);
+//    				Intent tabIntent = new Intent(HeartRateActivity.this,TemperatureActivity.class);
+//    				Bundle bundle = new Bundle();
+//    				bundle.putDouble("temper", temper);
+//    				tabIntent.putExtras(bundle);
+//    				tabhost.addTab(tabhost.newTabSpec("tab2").setIndicator("spec2").setContent(tabIntent));
     				mCurrentProgress=0;
     				new Thread(new ProgressRunable()).start();
     			}
@@ -401,6 +428,9 @@ public class HeartRateActivity extends Activity {
     		}
     		private int byteToInt(byte[] b) {
     			return ((int)b[0]);
+    		}
+    		private double byteToDouble(byte[] b) {
+    			return ((double)b[1]);
     		}
     	};
         
